@@ -1,76 +1,93 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import profilePhoto from '../assets/Photo gw.jpg';
 
 const highlights = [
-	{ label: 'Focus', value: 'Computer Science and clean UI' },
-	{ label: 'Style', value: 'Minimal, airy, product-like design' },
-	{ label: 'Open to', value: 'Internships, freelance, and collaboration' },
+	{ label: 'Interest', value: 'Investment banking and financial services' },
+	{ label: 'Strength', value: 'Analysis, execution, and stakeholder communication' },
+	{ label: 'Background', value: 'CS student with web, AI, and automation experience' },
+];
+
+const education = [
+	{
+		period: 'Sep 2024 - Present',
+		title: 'The Hong Kong Polytechnic University',
+		detail:
+			'Bachelor of Science (Hons), Computer Science. Relevant coursework includes Object-Oriented Programming, Data Structures, Databases, Computer Networking, and Operating Systems. Awarded an Entry Scholarship (Merit-based), HKD 80,000.',
+	},
 ];
 
 const experience = [
 	{
-		period: '2025 - Present',
-		title: 'Your current role or study path',
+		period: 'Aug 2025 - Present',
+		title: 'Web Developer (Part-Time), Language Service International',
 		detail:
-			'Use this card to describe what you are doing right now. Add your university, role, focus area, or any ongoing work.',
+			'Designed and deployed a customer-facing web system to automate enquiry handling and reduce manual workload. Implemented frontend logic and UI components using JavaScript, HTML, and CSS while working closely with non-technical stakeholders.',
 	},
 	{
-		period: '2024 - 2025',
-		title: 'Previous experience',
+		period: 'Jul 2025 - Sep 2025',
+		title: 'Software Engineering Intern (Enterprise Systems), Nouvelle Biotech',
 		detail:
-			'Add internships, freelance work, clubs, hackathons, or any project experience that shows growth and responsibility.',
+			'Built an AI-powered OCR and computer-vision workflow to analyze prescriptions and count pills, reducing pharmacist processing time by 50%. Developed a full-stack mobile application using Vue.js (Nuxt) and REST APIs, and deployed services on AWS with role-based access controls.',
 	},
 	{
-		period: 'Earlier',
-		title: 'Awards, leadership, or community',
+		period: 'Jun 2025 - Jul 2025',
+		title: 'IT Clerk (Part-Time), Grandway International Education Limited',
 		detail:
-			'Use this for anything else that matters: competitions, volunteering, mentoring, or extra achievements.',
+			'Supported internal IT operations, updated the corporate website using WordPress, and helped prepare digital materials and internal reports for management use.',
+	},
+	{
+		period: 'May 2024 - Jun 2024',
+		title: 'Financial Consulting Intern, Trimegah Securities Asset Management',
+		detail:
+			'Assisted in analyzing client portfolios, investment objectives, and risk profiles across equities and mutual funds. Prepared structured reports and supported onboarding for 18 prospective clients.',
 	},
 ];
 
 const projects = [
 	{
-		title: 'Project One',
+		title: 'HK AI Companion',
 		summary:
-			'Add a short summary of your strongest project here. Keep the result-focused line simple and direct.',
-		stack: ['Astro', 'UI Design', 'API'],
+			'HackTheEast hackathon project: an AI assistant for tour guidance, study support, and general conversations. Built intent-based conversation flows and presented a working prototype under tight deadlines.',
+		stack: ['Hackathon', 'AI Assistant', 'Prototype'],
 	},
 	{
-		title: 'Project Two',
+		title: 'Prescription OCR Workflow',
 		summary:
-			'Use this card for another piece of work. Later you can swap the placeholder panel for an image or video.',
-		stack: ['TypeScript', 'Backend', 'Database'],
+			'Enterprise workflow from Nouvelle Biotech that used OCR and computer vision to analyze prescriptions and count pills more efficiently.',
+		stack: ['OCR', 'Computer Vision', 'AWS'],
 	},
 	{
-		title: 'Project Three',
+		title: 'Customer Enquiry Web System',
 		summary:
-			'This is a flexible slot for anything you want to highlight, from a personal app to a class project.',
-		stack: ['Research', 'Frontend', 'Prototype'],
+			'Customer-facing web system built during your part-time web developer role to automate enquiry handling and reduce manual work.',
+		stack: ['JavaScript', 'HTML', 'CSS'],
 	},
 ];
 
 const contactDetails = [
 	{ label: 'Email', value: 'keegan.jahja@connect.polyu.hk' },
-	{ label: 'LinkedIn', value: 'linkedin.com/in/keegan-gerrard-jahja' },
 	{ label: 'GitHub', value: 'github.com/Keegerrard' },
+	{ label: 'Phone', value: '+852 54619905' },
 ];
 ---
 
 <Layout
-	title="Your Name | Portfolio"
-	description="An Apple-inspired minimal portfolio template built with Astro."
+	title="Keegan Gerrard Jahja | Finance Portfolio"
+	description="Computer Science student focused on investment banking and financial services, with technical experience in web systems, AI workflows, and automation."
 >
 	<section class="hero reveal" id="home" data-reveal>
 		<div class="hero-copy">
-			<p class="eyebrow">Computer Science Student</p>
-			<h1>Clean, modern portfolio design with room for your story.</h1>
+			<p class="eyebrow">The Hong Kong Polytechnic University</p>
+			<h1>Keegan Gerrard Jahja</h1>
 			<p class="lede">
-				This draft keeps the layout polished and minimal while leaving space for your actual
-				experience, projects, and photos.
+				Computer Science student aiming for investment banking and financial services roles,
+				with a background in web systems, AI workflows, and practical software delivery.
 			</p>
 
 			<div class="actions">
-				<a class="button primary" href="#work">See work</a>
+				<a class="button primary" href="#experience">See experience</a>
 				<a class="button secondary" href="#contact">Contact</a>
 			</div>
 
@@ -86,41 +103,66 @@ const contactDetails = [
 
 		<div class="hero-visual" aria-label="Hero preview area">
 			<div class="portrait-frame">
-				<div class="portrait-placeholder">
-					<span>Portrait placeholder</span>
-					<p>Add your photo here later.</p>
-				</div>
+				<Image
+					class="portrait-image"
+					src={profilePhoto}
+					alt="Portrait of Keegan Gerrard Jahja"
+					width={560}
+					loading="eager"
+					decoding="async"
+					fetchpriority="high"
+				/>
 			</div>
 
-			<div class="floating-card">
-				<p>Template note</p>
-				<strong>Keep the content short. Let the spacing do the work.</strong>
-			</div>
+		
 		</div>
 	</section>
 
 	<section class="section split reveal" id="about" data-reveal>
 		<div class="section-heading">
 			<p class="section-label">About</p>
-			<h2>Write a short introduction that explains who you are.</h2>
+			<h2>Computer science student with practical web and systems experience.</h2>
 		</div>
 
 		<div class="about-card">
 			<p>
-				Use this space to describe what you study, what you enjoy building, and what kind of
-				opportunities you want next.
+				I am a BSc (Hons) Computer Science student at The Hong Kong Polytechnic University who is
+				interested in investment banking and financial services.
 			</p>
 			<p>
-				One strong paragraph is enough for a minimal portfolio. Keep it focused, human, and easy
-				to scan.
+				My finance experience includes analyzing client portfolios, investment objectives, and
+				risk profiles during my internship at Trimegah Securities Asset Management. Alongside that,
+				I have built web systems and AI workflows that strengthened my problem solving,
+				execution, and attention to detail.
 			</p>
+			<p>
+				I work with Python, C/C++, Java, JavaScript, SQL, Rust, HTML, CSS, REST APIs, Nuxt.js,
+				AWS, and Git, but I see those technical skills as a support to a finance-focused path.
+			</p>
+		</div>
+	</section>
+
+	<section class="section reveal" id="education" data-reveal>
+		<div class="section-heading narrow">
+			<p class="section-label">Education</p>
+			<h2>Where the portfolio starts.</h2>
+		</div>
+
+		<div class="timeline">
+			{education.map((item) => (
+				<article class="timeline-item">
+					<p class="timeline-period">{item.period}</p>
+					<h3>{item.title}</h3>
+					<p>{item.detail}</p>
+				</article>
+			))}
 		</div>
 	</section>
 
 	<section class="section reveal" id="experience" data-reveal>
 		<div class="section-heading narrow">
 			<p class="section-label">Experience</p>
-			<h2>Use this section as a simple timeline.</h2>
+			<h2>Roles that build a finance-focused profile.</h2>
 		</div>
 
 		<div class="timeline">
@@ -137,7 +179,7 @@ const contactDetails = [
 	<section class="section reveal" id="work" data-reveal>
 		<div class="section-heading narrow">
 			<p class="section-label">Selected Work</p>
-			<h2>Project cards with empty media blocks for future screenshots.</h2>
+			<h2>Technical work that supports structured thinking and delivery.</h2>
 		</div>
 
 		<div class="project-grid">
@@ -163,12 +205,13 @@ const contactDetails = [
 		<div class="contact-card">
 			<div>
 				<p class="section-label">Contact</p>
-				<h2>End with a clear invitation.</h2>
+				<h2>Open to investment banking and financial services opportunities.</h2>
 				<p>
-					This is where you can point people to email you, message you, or view your GitHub and
-					LinkedIn.
+					Reach out by email if you are hiring for internships or graduate opportunities in
+					finance. You can also view the GitHub profile if you want to see the technical side of
+					my background.
 				</p>
-				<a class="button primary" href="mailto:yourname@email.com">Email me</a>
+				<a class="button primary" href="mailto:keegan.jahja@connect.polyu.hk">Email me</a>
 			</div>
 
 			<div class="contact-list">
@@ -325,34 +368,16 @@ const contactDetails = [
 		min-height: 520px;
 		display: flex;
 		align-items: stretch;
+		overflow: hidden;
 	}
 
-	.portrait-placeholder {
+	.portrait-image {
 		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center top;
 		border-radius: 28px;
-		border: 1.5px dashed rgba(17, 17, 17, 0.18);
-		background: linear-gradient(180deg, rgba(10, 132, 255, 0.06), rgba(255, 255, 255, 0.85));
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		text-align: center;
-		padding: 32px;
-	}
-
-	.portrait-placeholder span {
-		font-size: 0.78rem;
-		text-transform: uppercase;
-		letter-spacing: 0.18em;
-		color: var(--muted);
-	}
-
-	.portrait-placeholder p {
-		margin: 12px 0 0;
-		max-width: 18ch;
-		font-size: 1.25rem;
-		line-height: 1.45;
-		letter-spacing: -0.03em;
+		display: block;
 	}
 
 	.floating-card {
