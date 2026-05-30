@@ -1,0 +1,317 @@
+---
+const {
+	title = 'Your Name | Portfolio',
+	description = 'Minimal Apple-inspired Astro portfolio template.',
+} = Astro.props;
+
+const brandName = title.split('|')[0].trim();
+---
+
+		<!doctype html>
+		<html lang="en">
+			<head>
+				<meta charset="UTF-8" />
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+				<link rel="icon" href="/favicon.ico" />
+				<meta name="generator" content={Astro.generator} />
+				<meta name="description" content={description} />
+				<meta name="theme-color" content="#f5f5f2" />
+				<title>{title}</title>
+			</head>
+			<body>
+				<div class="backdrop backdrop-left" aria-hidden="true"></div>
+				<div class="backdrop backdrop-right" aria-hidden="true"></div>
+
+				<div class="shell">
+					<header class="topbar">
+						<a class="brand" href="#home">{brandName}</a>
+						<nav class="nav" aria-label="Primary">
+							<a href="#about">About</a>
+							<a href="#experience">Experience</a>
+							<a href="#work">Work</a>
+							<a href="#contact">Contact</a>
+						</nav>
+						<a class="cta" href="#contact">Let's talk</a>
+					</header>
+
+					<main>
+						<slot />
+					</main>
+
+					<footer class="footer">
+						<p>Clean portfolio template built in Astro. Replace the placeholders with your own story.</p>
+					</footer>
+				</div>
+
+				<script>
+					const setupRevealAnimations = () => {
+						const elements = document.querySelectorAll('[data-reveal]');
+
+						if (!('IntersectionObserver' in window) || elements.length === 0) {
+							elements.forEach((element) => element.setAttribute('data-visible', 'true'));
+							return;
+						}
+
+						const observer = new IntersectionObserver((entries, observerInstance) => {
+							entries.forEach((entry) => {
+								if (entry.isIntersecting) {
+									entry.target.setAttribute('data-visible', 'true');
+									observerInstance.unobserve(entry.target);
+								}
+							});
+						}, { threshold: 0.18 });
+
+						elements.forEach((element) => observer.observe(element));
+					};
+
+					if (document.readyState === 'loading') {
+						document.addEventListener('DOMContentLoaded', setupRevealAnimations, { once: true });
+					} else {
+						setupRevealAnimations();
+					}
+				</script>
+			</body>
+		</html>
+
+		<style>
+			:root {
+				color-scheme: light;
+				--bg: #f5f5f2;
+				--bg-elevated: rgba(255, 255, 255, 0.66);
+				--surface: rgba(255, 255, 255, 0.72);
+				--surface-strong: #ffffff;
+				--text: #111111;
+				--muted: rgba(17, 17, 17, 0.68);
+				--line: rgba(17, 17, 17, 0.08);
+				--accent: #0a84ff;
+				--accent-soft: rgba(10, 132, 255, 0.12);
+			}
+
+			html {
+				scroll-behavior: smooth;
+			}
+
+			body {
+				margin: 0;
+				min-height: 100vh;
+				background:
+					radial-gradient(circle at top left, rgba(10, 132, 255, 0.12), transparent 28%),
+					radial-gradient(circle at top right, rgba(255, 255, 255, 0.9), transparent 28%),
+					linear-gradient(180deg, #fbfbf8 0%, #f4f4f0 100%);
+				color: var(--text);
+				font-family:
+					'SF Pro Display', 'SF Pro Text', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+					sans-serif;
+				text-rendering: optimizeLegibility;
+				-webkit-font-smoothing: antialiased;
+			}
+
+			body::selection {
+				background: #111111;
+				color: #ffffff;
+			}
+
+			a {
+				color: inherit;
+			}
+
+			.backdrop {
+				position: fixed;
+				inset: auto;
+				width: 34rem;
+				height: 34rem;
+				border-radius: 999px;
+				filter: blur(80px);
+				opacity: 0.45;
+				pointer-events: none;
+				z-index: -1;
+			}
+
+			.backdrop-left {
+				top: -10rem;
+				left: -10rem;
+				background: rgba(255, 255, 255, 0.9);
+			}
+
+			.backdrop-right {
+				right: -12rem;
+				top: 18rem;
+				background: rgba(10, 132, 255, 0.16);
+			}
+
+			.shell {
+				width: min(1160px, calc(100% - 32px));
+				margin: 0 auto;
+				padding: 18px 0 32px;
+			}
+
+			.topbar {
+				position: sticky;
+				top: 16px;
+				z-index: 20;
+				display: flex;
+				align-items: center;
+				gap: 16px;
+				padding: 14px 18px;
+				border: 1px solid var(--line);
+				border-radius: 999px;
+				background: var(--bg-elevated);
+				backdrop-filter: blur(24px);
+				-webkit-backdrop-filter: blur(24px);
+				box-shadow: 0 24px 60px rgba(17, 17, 17, 0.06);
+			}
+
+			.brand {
+				flex-shrink: 0;
+				text-decoration: none;
+				font-size: 0.98rem;
+				font-weight: 600;
+				letter-spacing: -0.04em;
+			}
+
+			.nav {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 24px;
+				flex: 1;
+			}
+
+			.nav a,
+			.cta {
+				text-decoration: none;
+				font-size: 0.95rem;
+				letter-spacing: -0.02em;
+			}
+
+			.nav a {
+				color: var(--muted);
+				transition: color 180ms ease;
+			}
+
+			.nav a:hover,
+			.nav a:focus-visible {
+				color: var(--text);
+			}
+
+			.cta {
+				flex-shrink: 0;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 10px 16px;
+				border-radius: 999px;
+				background: var(--text);
+				color: #ffffff;
+				transition:
+					transform 180ms ease,
+					box-shadow 180ms ease,
+					background 180ms ease;
+			}
+
+			.cta:hover,
+			.cta:focus-visible {
+				transform: translateY(-1px);
+				box-shadow: 0 12px 24px rgba(17, 17, 17, 0.12);
+				background: #000000;
+			}
+
+			main {
+				padding-top: 28px;
+			}
+
+			.footer {
+				padding: 42px 6px 8px;
+				color: var(--muted);
+				font-size: 0.92rem;
+				letter-spacing: -0.01em;
+			}
+
+			.reveal {
+				opacity: 0;
+				transform: translateY(18px);
+				transition:
+					opacity 720ms ease,
+					transform 720ms ease;
+				transition-delay: 80ms;
+			}
+
+			.reveal[data-visible='true'] {
+				opacity: 1;
+				transform: translateY(0);
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				html {
+					scroll-behavior: auto;
+				}
+
+				.reveal {
+					opacity: 1;
+					transform: none;
+					transition: none;
+				}
+
+				.cta,
+				.nav a {
+					transition: none;
+				}
+			}
+
+			@media (max-width: 900px) {
+				.shell {
+					width: min(100% - 20px, 1160px);
+				}
+
+				.topbar {
+					flex-wrap: wrap;
+					border-radius: 28px;
+					padding: 16px;
+				}
+
+				.nav {
+					order: 3;
+					width: 100%;
+					justify-content: space-between;
+					gap: 12px;
+					padding-top: 4px;
+				}
+
+				.cta {
+					margin-left: auto;
+				}
+			}
+
+			@media (max-width: 620px) {
+				.shell {
+					width: min(100% - 16px, 1160px);
+					padding-top: 8px;
+				}
+
+				.topbar {
+					position: static;
+					gap: 12px;
+				}
+
+				.nav {
+					gap: 10px;
+					overflow-x: auto;
+					justify-content: flex-start;
+					scrollbar-width: none;
+				}
+
+				.nav::-webkit-scrollbar {
+					display: none;
+				}
+
+				.cta {
+					width: 100%;
+					margin-left: 0;
+				}
+
+				.footer {
+					padding-top: 32px;
+				}
+			}
+		</style>

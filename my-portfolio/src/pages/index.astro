@@ -1,0 +1,664 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const highlights = [
+	{ label: 'Focus', value: 'Computer Science and clean UI' },
+	{ label: 'Style', value: 'Minimal, airy, product-like design' },
+	{ label: 'Open to', value: 'Internships, freelance, and collaboration' },
+];
+
+const experience = [
+	{
+		period: '2025 - Present',
+		title: 'Your current role or study path',
+		detail:
+			'Use this card to describe what you are doing right now. Add your university, role, focus area, or any ongoing work.',
+	},
+	{
+		period: '2024 - 2025',
+		title: 'Previous experience',
+		detail:
+			'Add internships, freelance work, clubs, hackathons, or any project experience that shows growth and responsibility.',
+	},
+	{
+		period: 'Earlier',
+		title: 'Awards, leadership, or community',
+		detail:
+			'Use this for anything else that matters: competitions, volunteering, mentoring, or extra achievements.',
+	},
+];
+
+const projects = [
+	{
+		title: 'Project One',
+		summary:
+			'Add a short summary of your strongest project here. Keep the result-focused line simple and direct.',
+		stack: ['Astro', 'UI Design', 'API'],
+	},
+	{
+		title: 'Project Two',
+		summary:
+			'Use this card for another piece of work. Later you can swap the placeholder panel for an image or video.',
+		stack: ['TypeScript', 'Backend', 'Database'],
+	},
+	{
+		title: 'Project Three',
+		summary:
+			'This is a flexible slot for anything you want to highlight, from a personal app to a class project.',
+		stack: ['Research', 'Frontend', 'Prototype'],
+	},
+];
+
+const contactDetails = [
+	{ label: 'Email', value: 'keegan.jahja@connect.polyu.hk' },
+	{ label: 'LinkedIn', value: 'linkedin.com/in/keegan-gerrard-jahja' },
+	{ label: 'GitHub', value: 'github.com/Keegerrard' },
+];
+---
+
+<Layout
+	title="Your Name | Portfolio"
+	description="An Apple-inspired minimal portfolio template built with Astro."
+>
+	<section class="hero reveal" id="home" data-reveal>
+		<div class="hero-copy">
+			<p class="eyebrow">Computer Science Student</p>
+			<h1>Clean, modern portfolio design with room for your story.</h1>
+			<p class="lede">
+				This draft keeps the layout polished and minimal while leaving space for your actual
+				experience, projects, and photos.
+			</p>
+
+			<div class="actions">
+				<a class="button primary" href="#work">See work</a>
+				<a class="button secondary" href="#contact">Contact</a>
+			</div>
+
+			<div class="highlights">
+				{highlights.map((item) => (
+					<article class="highlight-card">
+						<span>{item.label}</span>
+						<strong>{item.value}</strong>
+					</article>
+				))}
+			</div>
+		</div>
+
+		<div class="hero-visual" aria-label="Hero preview area">
+			<div class="portrait-frame">
+				<div class="portrait-placeholder">
+					<span>Portrait placeholder</span>
+					<p>Add your photo here later.</p>
+				</div>
+			</div>
+
+			<div class="floating-card">
+				<p>Template note</p>
+				<strong>Keep the content short. Let the spacing do the work.</strong>
+			</div>
+		</div>
+	</section>
+
+	<section class="section split reveal" id="about" data-reveal>
+		<div class="section-heading">
+			<p class="section-label">About</p>
+			<h2>Write a short introduction that explains who you are.</h2>
+		</div>
+
+		<div class="about-card">
+			<p>
+				Use this space to describe what you study, what you enjoy building, and what kind of
+				opportunities you want next.
+			</p>
+			<p>
+				One strong paragraph is enough for a minimal portfolio. Keep it focused, human, and easy
+				to scan.
+			</p>
+		</div>
+	</section>
+
+	<section class="section reveal" id="experience" data-reveal>
+		<div class="section-heading narrow">
+			<p class="section-label">Experience</p>
+			<h2>Use this section as a simple timeline.</h2>
+		</div>
+
+		<div class="timeline">
+			{experience.map((item) => (
+				<article class="timeline-item">
+					<p class="timeline-period">{item.period}</p>
+					<h3>{item.title}</h3>
+					<p>{item.detail}</p>
+				</article>
+			))}
+		</div>
+	</section>
+
+	<section class="section reveal" id="work" data-reveal>
+		<div class="section-heading narrow">
+			<p class="section-label">Selected Work</p>
+			<h2>Project cards with empty media blocks for future screenshots.</h2>
+		</div>
+
+		<div class="project-grid">
+			{projects.map((project, index) => (
+				<article class="project-card">
+					<div class="project-media" role="img" aria-label={`Placeholder for ${project.title}`}>
+						<span>Image or video placeholder</span>
+					</div>
+					<div class="project-body">
+						<p class="project-index">0{index + 1}</p>
+						<h3>{project.title}</h3>
+						<p>{project.summary}</p>
+						<ul class="stack">
+							{project.stack.map((tech) => <li>{tech}</li>)}
+						</ul>
+					</div>
+				</article>
+			))}
+		</div>
+	</section>
+
+	<section class="section contact reveal" id="contact" data-reveal>
+		<div class="contact-card">
+			<div>
+				<p class="section-label">Contact</p>
+				<h2>End with a clear invitation.</h2>
+				<p>
+					This is where you can point people to email you, message you, or view your GitHub and
+					LinkedIn.
+				</p>
+				<a class="button primary" href="mailto:yourname@email.com">Email me</a>
+			</div>
+
+			<div class="contact-list">
+				{contactDetails.map((item) => (
+					<div class="contact-item">
+						<span>{item.label}</span>
+						<strong>{item.value}</strong>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.hero,
+	.section {
+		scroll-margin-top: 120px;
+	}
+
+	.hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+		gap: 28px;
+		align-items: center;
+		padding: 32px 0 72px;
+	}
+
+	.hero-copy {
+		max-width: 42rem;
+	}
+
+	.eyebrow,
+	.section-label {
+		margin: 0;
+		font-size: 0.74rem;
+		font-weight: 700;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--accent);
+	}
+
+	.hero h1 {
+		margin: 14px 0 0;
+		font-size: clamp(3.5rem, 7vw, 6.9rem);
+		line-height: 0.94;
+		letter-spacing: -0.08em;
+		max-width: 10ch;
+	}
+
+	.lede {
+		margin: 26px 0 0;
+		font-size: clamp(1.06rem, 1.55vw, 1.3rem);
+		line-height: 1.7;
+		letter-spacing: -0.02em;
+		color: var(--muted);
+		max-width: 34rem;
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin-top: 30px;
+	}
+
+	.button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 13px 20px;
+		border-radius: 999px;
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		text-decoration: none;
+		transition:
+			transform 180ms ease,
+			box-shadow 180ms ease,
+			background 180ms ease,
+			color 180ms ease,
+			border-color 180ms ease;
+	}
+
+	.button:hover,
+	.button:focus-visible {
+		transform: translateY(-1px);
+	}
+
+	.button.primary {
+		background: var(--text);
+		color: #ffffff;
+		box-shadow: 0 18px 36px rgba(17, 17, 17, 0.14);
+	}
+
+	.button.primary:hover,
+	.button.primary:focus-visible {
+		box-shadow: 0 22px 40px rgba(17, 17, 17, 0.18);
+	}
+
+	.button.secondary {
+		border: 1px solid var(--line);
+		background: rgba(255, 255, 255, 0.72);
+		color: var(--text);
+	}
+
+	.button.secondary:hover,
+	.button.secondary:focus-visible {
+		background: #ffffff;
+		border-color: rgba(17, 17, 17, 0.12);
+	}
+
+	.highlights {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 12px;
+		margin-top: 28px;
+	}
+
+	.highlight-card {
+		padding: 18px;
+		border-radius: 24px;
+		background: rgba(255, 255, 255, 0.72);
+		border: 1px solid var(--line);
+		box-shadow: 0 18px 40px rgba(17, 17, 17, 0.05);
+	}
+
+	.highlight-card span {
+		display: block;
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		color: var(--muted);
+	}
+
+	.highlight-card strong {
+		display: block;
+		margin-top: 10px;
+		font-size: 1rem;
+		line-height: 1.5;
+		letter-spacing: -0.02em;
+	}
+
+	.hero-visual {
+		display: grid;
+		gap: 16px;
+	}
+
+	.portrait-frame {
+		border-radius: 36px;
+		padding: 16px;
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.72));
+		border: 1px solid var(--line);
+		box-shadow: 0 30px 60px rgba(17, 17, 17, 0.08);
+		min-height: 520px;
+		display: flex;
+		align-items: stretch;
+	}
+
+	.portrait-placeholder {
+		width: 100%;
+		border-radius: 28px;
+		border: 1.5px dashed rgba(17, 17, 17, 0.18);
+		background: linear-gradient(180deg, rgba(10, 132, 255, 0.06), rgba(255, 255, 255, 0.85));
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		padding: 32px;
+	}
+
+	.portrait-placeholder span {
+		font-size: 0.78rem;
+		text-transform: uppercase;
+		letter-spacing: 0.18em;
+		color: var(--muted);
+	}
+
+	.portrait-placeholder p {
+		margin: 12px 0 0;
+		max-width: 18ch;
+		font-size: 1.25rem;
+		line-height: 1.45;
+		letter-spacing: -0.03em;
+	}
+
+	.floating-card {
+		margin-left: auto;
+		width: min(84%, 360px);
+		padding: 18px 20px;
+		border-radius: 24px;
+		background: rgba(17, 17, 17, 0.94);
+		color: #ffffff;
+		box-shadow: 0 24px 50px rgba(17, 17, 17, 0.2);
+	}
+
+	.floating-card p {
+		margin: 0;
+		color: rgba(255, 255, 255, 0.7);
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		font-size: 0.72rem;
+	}
+
+	.floating-card strong {
+		display: block;
+		margin-top: 10px;
+		font-size: 1.04rem;
+		line-height: 1.55;
+		letter-spacing: -0.02em;
+	}
+
+	.section {
+		padding: 84px 0 0;
+	}
+
+	.section-heading h2 {
+		margin: 10px 0 0;
+		font-size: clamp(2rem, 3.5vw, 3.2rem);
+		line-height: 1.05;
+		letter-spacing: -0.05em;
+		max-width: 12ch;
+	}
+
+	.section-heading.narrow h2 {
+		max-width: 14ch;
+	}
+
+	.split {
+		display: grid;
+		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+		gap: 24px;
+		align-items: start;
+	}
+
+	.about-card {
+		padding: 28px;
+		border-radius: 32px;
+		background: rgba(255, 255, 255, 0.74);
+		border: 1px solid var(--line);
+		box-shadow: 0 20px 40px rgba(17, 17, 17, 0.05);
+		font-size: 1.08rem;
+		line-height: 1.85;
+		color: var(--muted);
+		letter-spacing: -0.02em;
+	}
+
+	.about-card p + p {
+		margin-top: 16px;
+	}
+
+	.timeline {
+		margin-top: 28px;
+		display: grid;
+		gap: 14px;
+	}
+
+	.timeline-item {
+		padding: 24px 26px;
+		border-radius: 28px;
+		background: rgba(255, 255, 255, 0.72);
+		border: 1px solid var(--line);
+		box-shadow: 0 18px 40px rgba(17, 17, 17, 0.05);
+		display: grid;
+		gap: 10px;
+	}
+
+	.timeline-period {
+		margin: 0;
+		font-size: 0.74rem;
+		text-transform: uppercase;
+		letter-spacing: 0.18em;
+		color: var(--muted);
+	}
+
+	.timeline-item h3 {
+		margin: 0;
+		font-size: 1.35rem;
+		letter-spacing: -0.04em;
+	}
+
+	.timeline-item p:last-child {
+		margin: 0;
+		color: var(--muted);
+		line-height: 1.75;
+	}
+
+	.project-grid {
+		margin-top: 28px;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 18px;
+	}
+
+	.project-card {
+		overflow: hidden;
+		border-radius: 32px;
+		background: rgba(255, 255, 255, 0.75);
+		border: 1px solid var(--line);
+		box-shadow: 0 18px 40px rgba(17, 17, 17, 0.05);
+		transition:
+			transform 220ms ease,
+			box-shadow 220ms ease,
+			border-color 220ms ease;
+	}
+
+	.project-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 28px 52px rgba(17, 17, 17, 0.09);
+		border-color: rgba(17, 17, 17, 0.12);
+	}
+
+	.project-media {
+		min-height: 220px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 28px;
+		background: linear-gradient(135deg, rgba(10, 132, 255, 0.12), rgba(255, 255, 255, 0.9));
+		border-bottom: 1px solid var(--line);
+		color: var(--muted);
+		text-align: center;
+	}
+
+	.project-media span {
+		max-width: 14ch;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		font-size: 0.72rem;
+		line-height: 1.8;
+	}
+
+	.project-body {
+		padding: 22px 22px 24px;
+	}
+
+	.project-index {
+		margin: 0 0 10px;
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.18em;
+		color: var(--accent);
+	}
+
+	.project-body h3 {
+		margin: 0;
+		font-size: 1.4rem;
+		letter-spacing: -0.04em;
+	}
+
+	.project-body p {
+		margin: 12px 0 0;
+		color: var(--muted);
+		line-height: 1.75;
+	}
+
+	.stack {
+		list-style: none;
+		padding: 0;
+		margin: 18px 0 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.stack li {
+		padding: 8px 12px;
+		border-radius: 999px;
+		background: var(--accent-soft);
+		color: var(--accent);
+		font-size: 0.84rem;
+		font-weight: 600;
+	}
+
+	.contact-card {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+		gap: 28px;
+		padding: 32px;
+		border-radius: 36px;
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.72));
+		border: 1px solid var(--line);
+		box-shadow: 0 24px 54px rgba(17, 17, 17, 0.06);
+	}
+
+	.contact-card h2 {
+		margin: 10px 0 0;
+		font-size: clamp(2rem, 3.4vw, 3rem);
+		letter-spacing: -0.05em;
+		line-height: 1.06;
+		max-width: 12ch;
+	}
+
+	.contact-card p {
+		color: var(--muted);
+		line-height: 1.8;
+		max-width: 34rem;
+	}
+
+	.contact-card .button {
+		margin-top: 18px;
+	}
+
+	.contact-list {
+		display: grid;
+		gap: 14px;
+	}
+
+	.contact-item {
+		padding: 18px 20px;
+		border-radius: 24px;
+		background: rgba(255, 255, 255, 0.88);
+		border: 1px solid var(--line);
+		display: flex;
+		justify-content: space-between;
+		gap: 16px;
+		align-items: baseline;
+	}
+
+	.contact-item span {
+		color: var(--muted);
+		font-size: 0.82rem;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+	}
+
+	.contact-item strong {
+		font-size: 0.98rem;
+		letter-spacing: -0.02em;
+	}
+
+	@media (max-width: 1000px) {
+		.hero,
+		.split,
+		.contact-card {
+			grid-template-columns: 1fr;
+		}
+
+		.hero {
+			gap: 20px;
+		}
+
+		.hero h1 {
+			max-width: none;
+		}
+
+		.highlights {
+			grid-template-columns: 1fr;
+		}
+
+		.project-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.portrait-frame {
+			min-height: 420px;
+		}
+
+		.floating-card {
+			width: min(100%, 420px);
+		}
+
+		.section-heading h2,
+		.contact-card h2 {
+			max-width: none;
+		}
+	}
+
+	@media (max-width: 760px) {
+		.hero {
+			padding-top: 20px;
+			padding-bottom: 48px;
+		}
+
+		.hero h1 {
+			font-size: clamp(2.8rem, 15vw, 4.4rem);
+		}
+
+		.section {
+			padding-top: 64px;
+		}
+
+		.about-card,
+		.timeline-item,
+		.contact-card {
+			padding: 22px;
+		}
+
+		.portrait-frame {
+			min-height: 360px;
+		}
+	}
+</style>
