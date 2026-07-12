@@ -1,689 +1,373 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import ProjectGallery, { type Project } from '../components/ProjectGallery.tsx';
 import profilePhoto from '../assets/Photo gw.jpg';
 
-const highlights = [
-	{ label: 'Interest', value: 'Investment banking and financial services' },
-	{ label: 'Strength', value: 'Analysis, execution, and stakeholder communication' },
-	{ label: 'Background', value: 'CS student with web, AI, and automation experience' },
+const CV_PATH = '/Keegan_Gerrard_Jahja_CV.pdf';
+
+const stats = [
+	{ value: 'HKD 80K', label: 'Merit entry scholarship, PolyU' },
+	{ value: '50%', label: 'Pharmacist processing time cut with AI OCR' },
+	{ value: '18', label: 'Clients onboarded at Trimegah Securities' },
 ];
 
-const education = [
+const ticker = [
+	'Python', 'SQL', 'Rust', 'C / C++', 'Java', 'JavaScript', 'Nuxt.js',
+	'REST APIs', 'AWS', 'Git', 'R', 'Data Analysis', 'Portfolio Analysis',
+	'Risk Profiling', 'RAG', 'FastAPI',
+];
+
+const now = [
+	{ label: 'Studying', value: 'BSc (Hons) CS · PolyU' },
+	{ label: 'Leading', value: 'Indonesian Student Association · Person In Charge' },
+	{ label: 'Building', value: 'AI Financial Analyst' },
+	{ label: 'Speaking', value: 'English · Indonesian · Chinese (basic)' },
+	{ label: 'Aiming', value: 'IB & financial services internships' },
+];
+
+const journey = [
 	{
-		period: 'Sep 2024 - Present',
-		title: 'The Hong Kong Polytechnic University',
-		detail:
-			'Bachelor of Science (Hons), Computer Science. Relevant coursework includes Object-Oriented Programming, Data Structures, Databases, Computer Networking, and Operating Systems. Awarded an Entry Scholarship (Merit-based), HKD 80,000.',
+		period: 'May 2024',
+		place: 'Jakarta',
+		org: 'Trimegah Securities',
+		headline: 'First seat in finance.',
+		detail: 'Analyzed portfolios and risk profiles across equities and mutual funds — and onboarded 18 prospective clients.',
+	},
+	{
+		period: 'Jan 2025 — now',
+		place: 'Hong Kong',
+		org: 'Indonesian Student Association',
+		headline: 'Leading, not just coding.',
+		detail: 'Person In Charge — planning and running a large-scale student event across multiple teams.',
+	},
+	{
+		period: 'Feb 2025',
+		place: 'Hong Kong',
+		org: 'HackTheEast',
+		headline: '48 hours, one AI companion.',
+		detail: 'Took HK AI Companion from concept to a live demo in front of judges.',
+	},
+	{
+		period: 'Jun 2025',
+		place: 'Hong Kong',
+		org: 'Grandway Education',
+		headline: 'IT groundwork.',
+		detail: 'Kept systems documented, backed up, and the corporate site running.',
+	},
+	{
+		period: 'Jul 2025',
+		place: 'Hong Kong',
+		org: 'Nouvelle Biotech',
+		headline: 'AI pharmacists can feel.',
+		detail: 'OCR + computer-vision pipeline that cut processing time by 50% — shipped on AWS with secure access.',
+	},
+	{
+		period: 'Aug 2025 — now',
+		place: 'Hong Kong',
+		org: 'Language Service International',
+		headline: 'Software that kills busywork.',
+		detail: 'A customer enquiry system built end to end, with non-technical stakeholders in the loop.',
 	},
 ];
 
-const experience = [
+const projects: Project[] = [
 	{
-		period: 'Aug 2025 - Present',
-		title: 'Web Developer (Part-Time), Language Service International',
-		detail:
-			'Designed and deployed a customer-facing web system to automate enquiry handling and reduce manual workload. Implemented frontend logic and UI components using JavaScript, HTML, and CSS while working closely with non-technical stakeholders.',
+		id: 'ai-financial-analyst',
+		title: 'AI Financial Analyst',
+		category: 'finance',
+		year: '2025',
+		size: 'lg',
+		summary:
+			'Query stocks in natural language — AI-summarized news, interactive charts, and RAG-grounded answers.',
+		description:
+			'An AI financial assistant built with Python, FastAPI, Streamlit, and Google Gemini 2.0 Flash. Ask about stocks in plain English, get AI-summarized market news, compare tickers with interactive Plotly charts (candlesticks, heatmaps), and receive context-aware answers through RAG over OpenSearch.',
+		highlights: [
+			'Natural-language stock queries powered by Gemini 2.0 Flash',
+			'RAG with OpenSearch for context-aware, grounded responses',
+			'Interactive Plotly candlestick and heatmap comparisons',
+			'98% faster responses through intelligent caching',
+		],
+		stack: ['Python', 'FastAPI', 'Streamlit', 'Gemini', 'RAG', 'OpenSearch'],
+		repo: 'https://github.com/Keegerrard/AI-Financial-Analyst-Backend',
 	},
 	{
-		period: 'Jul 2025 - Sep 2025',
-		title: 'Software Engineering Intern (Enterprise Systems), Nouvelle Biotech',
-		detail:
-			'Built an AI-powered OCR and computer-vision workflow to analyze prescriptions and count pills, reducing pharmacist processing time by 50%. Developed a full-stack mobile application using Vue.js (Nuxt) and REST APIs, and deployed services on AWS with role-based access controls.',
-	},
-	{
-		period: 'Jun 2025 - Jul 2025',
-		title: 'IT Clerk (Part-Time), Grandway International Education Limited',
-		detail:
-			'Supported internal IT operations, updated the corporate website using WordPress, and helped prepare digital materials and internal reports for management use.',
-	},
-	{
-		period: 'May 2024 - Jun 2024',
-		title: 'Financial Consulting Intern, Trimegah Securities Asset Management',
-		detail:
-			'Assisted in analyzing client portfolios, investment objectives, and risk profiles across equities and mutual funds. Prepared structured reports and supported onboarding for 18 prospective clients.',
-	},
-];
-
-const projects = [
-	{
+		id: 'hk-ai-companion',
 		title: 'HK AI Companion',
-		summary:
-			'HackTheEast hackathon project: an AI assistant for tour guidance, study support, and general conversations. Built intent-based conversation flows and presented a working prototype under tight deadlines.',
-		stack: ['Hackathon', 'AI Assistant', 'Prototype'],
+		category: 'ai',
+		year: '2025',
+		size: 'md',
+		summary: 'HackTheEast prototype — AI assistant for tour guidance and study support.',
+		description:
+			'A hackathon project built under a tight deadline for HackTheEast. HK AI Companion handles tour guidance, study support, and general conversation through intent-based conversation flows, presented live as a working end-to-end prototype.',
+		highlights: [
+			'Intent-based conversation routing designed from scratch',
+			'Working demo delivered within the hackathon window',
+			'Presented the prototype live to judges',
+		],
+		stack: ['Python', 'NLP', 'Prototyping'],
+		repo: 'https://github.com/Keegerrard/HTE_CompanionHK',
 	},
 	{
+		id: 'prescription-ocr',
 		title: 'Prescription OCR Workflow',
-		summary:
-			'Enterprise workflow from Nouvelle Biotech that used OCR and computer vision to analyze prescriptions and count pills more efficiently.',
-		stack: ['OCR', 'Computer Vision', 'AWS'],
+		category: 'ai',
+		year: '2025',
+		size: 'md',
+		summary: 'Enterprise OCR + computer vision that reads prescriptions and counts pills.',
+		description:
+			'An enterprise workflow built at Nouvelle Biotech using OCR and computer vision to analyze prescriptions and count pills automatically — reducing pharmacist processing time by 50%, deployed on AWS with role-based access controls.',
+		highlights: [
+			'Cut pharmacist processing time by 50%',
+			'Computer-vision pill-counting pipeline',
+			'Deployed on AWS with role-based access controls',
+		],
+		stack: ['OCR', 'Computer Vision', 'Python', 'AWS'],
 	},
 	{
+		id: 'enquiry-web-system',
 		title: 'Customer Enquiry Web System',
-		summary:
-			'Customer-facing web system built during your part-time web developer role to automate enquiry handling and reduce manual work.',
+		category: 'web',
+		year: '2025',
+		size: 'wide',
+		summary: 'Customer-facing system that automates enquiry handling for a language-services firm.',
+		description:
+			'Built during my part-time web developer role at Language Service International, this customer-facing system automates enquiry handling to reduce manual workload. I implemented the frontend logic and UI components while collaborating closely with non-technical stakeholders.',
+		highlights: [
+			'Automated enquiry handling, reducing manual workload',
+			'Frontend logic and UI components built end to end',
+			'Delivered in partnership with non-technical stakeholders',
+		],
 		stack: ['JavaScript', 'HTML', 'CSS'],
 	},
-];
-
-const contactDetails = [
-	{ label: 'Email', value: 'keegan.jahja@connect.polyu.hk' },
-	{ label: 'GitHub', value: 'github.com/Keegerrard' },
-	{ label: 'Phone', value: '+852 54619905' },
+	{
+		id: 'cmms-dbms',
+		title: 'CMMS Database System',
+		category: 'web',
+		year: '2025',
+		size: 'md',
+		summary: 'University group project — a maintenance-management system on a relational DBMS.',
+		description:
+			'A COMP2411 group project at PolyU: a Computerized Maintenance Management System built on a relational database, covering schema design, normalization, SQL, and an application layer for managing work orders and assets.',
+		highlights: [
+			'Relational schema design and normalization',
+			'SQL query layer for work orders and assets',
+			'Team delivery for COMP2411 (Database Systems)',
+		],
+		stack: ['SQL', 'DBMS', 'Schema Design'],
+		repo: 'https://github.com/Keegerrard/COMP2411_DBMS_CMMS_GroupProject',
+	},
 ];
 ---
 
 <Layout
-	title="Keegan Gerrard Jahja | Finance Portfolio"
-	description="Computer Science student focused on investment banking and financial services, with technical experience in web systems, AI workflows, and automation."
+	title="Keegan Gerrard Jahja | Finance × Tech"
+	description="CS student at PolyU headed for investment banking — building AI and web systems along the way."
 >
-	<section class="hero reveal" id="home" data-reveal>
-		<div class="hero-copy">
-			<p class="eyebrow">The Hong Kong Polytechnic University</p>
-			<h1>Keegan Gerrard Jahja</h1>
-			<p class="lede">
-				Computer Science student aiming for investment banking and financial services roles,
-				with a background in web systems, AI workflows, and practical software delivery.
-			</p>
+	<!-- ============================ HERO ============================ -->
+	<section id="home" data-reveal class="reveal flex scroll-mt-16 flex-col items-center pt-16 pb-8 text-center sm:pt-24">
+		<Image
+			class="h-24 w-24 rounded-full object-cover object-top ring-1 ring-hairline"
+			src={profilePhoto}
+			alt="Portrait of Keegan Gerrard Jahja"
+			width={192}
+			loading="eager"
+			decoding="async"
+			fetchpriority="high"
+		/>
+		<p class="mt-6 text-sm font-medium text-ink-muted">
+			Keegan Gerrard Jahja · Computer Science @ PolyU
+		</p>
+		<h1 class="mt-3 max-w-3xl text-5xl font-semibold tracking-[-0.03em] text-ink sm:text-7xl">
+			Thinks finance.<br />Ships software.
+		</h1>
+		<p class="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
+			CS student in Hong Kong headed for investment banking — building AI and web systems along
+			the way, so the analysis comes with execution.
+		</p>
 
-			<div class="actions">
-				<a class="button primary" href="#experience">See experience</a>
-				<a class="button secondary" href="#contact">Contact</a>
-			</div>
-
-			<div class="highlights">
-				{highlights.map((item) => (
-					<article class="highlight-card">
-						<span>{item.label}</span>
-						<strong>{item.value}</strong>
-					</article>
-				))}
-			</div>
+		<div class="mt-8 flex items-center gap-6">
+			<a
+				href="#work"
+				class="cursor-pointer rounded-full bg-accent px-5 py-2.5 text-[0.95rem] font-medium text-white transition-colors duration-200 hover:bg-accent-hover"
+			>
+				See the work
+			</a>
+			<a
+				href={CV_PATH}
+				download
+				class="cursor-pointer text-[0.95rem] font-medium text-accent hover:underline"
+			>
+				Download CV <span aria-hidden="true">↓</span>
+			</a>
 		</div>
 
-		<div class="hero-visual" aria-label="Hero preview area">
-			<div class="portrait-frame">
-				<Image
-					class="portrait-image"
-					src={profilePhoto}
-					alt="Portrait of Keegan Gerrard Jahja"
-					width={560}
-					loading="eager"
-					decoding="async"
-					fetchpriority="high"
-				/>
-			</div>
-
-		
-		</div>
-	</section>
-
-	<section class="section split reveal" id="about" data-reveal>
-		<div class="section-heading">
-			<p class="section-label">About</p>
-			<h2>Computer science student with practical web and systems experience.</h2>
-		</div>
-
-		<div class="about-card">
-			<p>
-				I am a BSc (Hons) Computer Science student at The Hong Kong Polytechnic University who is
-				interested in investment banking and financial services.
-			</p>
-			<p>
-				My finance experience includes analyzing client portfolios, investment objectives, and
-				risk profiles during my internship at Trimegah Securities Asset Management. Alongside that,
-				I have built web systems and AI workflows that strengthened my problem solving,
-				execution, and attention to detail.
-			</p>
-			<p>
-				I work with Python, C/C++, Java, JavaScript, SQL, Rust, HTML, CSS, REST APIs, Nuxt.js,
-				AWS, and Git, but I see those technical skills as a support to a finance-focused path.
-			</p>
-		</div>
-	</section>
-
-	<section class="section reveal" id="education" data-reveal>
-		<div class="section-heading narrow">
-			<p class="section-label">Education</p>
-			<h2>Where the portfolio starts.</h2>
-		</div>
-
-		<div class="timeline">
-			{education.map((item) => (
-				<article class="timeline-item">
-					<p class="timeline-period">{item.period}</p>
-					<h3>{item.title}</h3>
-					<p>{item.detail}</p>
-				</article>
+		<div class="mt-16 grid w-full max-w-3xl grid-cols-1 divide-y divide-hairline border-y border-hairline sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+			{stats.map((s) => (
+				<div class="px-6 py-5">
+					<p class="text-3xl font-semibold tracking-tight text-ink">{s.value}</p>
+					<p class="mt-1 text-sm leading-snug text-ink-muted">{s.label}</p>
+				</div>
 			))}
 		</div>
 	</section>
 
-	<section class="section reveal" id="experience" data-reveal>
-		<div class="section-heading narrow">
-			<p class="section-label">Experience</p>
-			<h2>Roles that build a finance-focused profile.</h2>
-		</div>
-
-		<div class="timeline">
-			{experience.map((item) => (
-				<article class="timeline-item">
-					<p class="timeline-period">{item.period}</p>
-					<h3>{item.title}</h3>
-					<p>{item.detail}</p>
-				</article>
+	<!-- ====================== SKILLS TICKER ======================== -->
+	<div class="marquee-mask mt-10 overflow-hidden" aria-hidden="true">
+		<div class="marquee-track">
+			{[0, 1].map(() => (
+				<ul class="flex shrink-0 items-center gap-2.5 pr-2.5">
+					{ticker.map((t) => (
+						<li class="whitespace-nowrap rounded-full bg-panel px-4 py-2 text-sm text-ink-muted">
+							{t}
+						</li>
+					))}
+				</ul>
 			))}
 		</div>
-	</section>
+	</div>
 
-	<section class="section reveal" id="work" data-reveal>
-		<div class="section-heading narrow">
-			<p class="section-label">Selected Work</p>
-			<h2>Technical work that supports structured thinking and delivery.</h2>
-		</div>
-
-		<div class="project-grid">
-			{projects.map((project, index) => (
-				<article class="project-card">
-					<div class="project-media" role="img" aria-label={`Placeholder for ${project.title}`}>
-						<span>Image or video placeholder</span>
-					</div>
-					<div class="project-body">
-						<p class="project-index">0{index + 1}</p>
-						<h3>{project.title}</h3>
-						<p>{project.summary}</p>
-						<ul class="stack">
-							{project.stack.map((tech) => <li>{tech}</li>)}
-						</ul>
-					</div>
-				</article>
-			))}
-		</div>
-	</section>
-
-	<section class="section contact reveal" id="contact" data-reveal>
-		<div class="contact-card">
+	<!-- ============================ ABOUT ========================== -->
+	<section id="about" data-reveal class="reveal cv-auto scroll-mt-16 pt-24">
+		<div class="grid gap-10 lg:grid-cols-[1.15fr_0.85fr]">
 			<div>
-				<p class="section-label">Contact</p>
-				<h2>Open to investment banking and financial services opportunities.</h2>
-				<p>
-					Reach out by email if you are hiring for internships or graduate opportunities in
-					finance. You can also view the GitHub profile if you want to see the technical side of
-					my background.
-				</p>
-				<a class="button primary" href="mailto:keegan.jahja@connect.polyu.hk">Email me</a>
+				<h2 class="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+					Finance first. <span class="text-ink-faint">Engineering close behind.</span>
+				</h2>
+				<div class="mt-6 max-w-xl space-y-4 text-[1.05rem] leading-relaxed text-ink-muted">
+					<p>
+						My first seat in finance was at Trimegah Securities in Jakarta — client portfolios,
+						risk profiles, equities and mutual funds. That's the work I'm going back to, at
+						investment-banking scale.
+					</p>
+					<p>
+						Everything since — AI workflows for pharmacies, web systems for real clients — is
+						execution practice: precision, delivery, and translating between technical and
+						non-technical people. The code is leverage, not the destination.
+					</p>
+				</div>
 			</div>
 
-			<div class="contact-list">
-				{contactDetails.map((item) => (
-					<div class="contact-item">
-						<span>{item.label}</span>
-						<strong>{item.value}</strong>
-					</div>
-				))}
+			<div class="rounded-3xl bg-panel p-7">
+				<p class="text-sm font-semibold text-ink">Right now</p>
+				<ul class="mt-4 divide-y divide-hairline">
+					{now.map((item) => (
+						<li class="flex items-baseline justify-between gap-6 py-3">
+							<span class="shrink-0 text-sm text-ink-faint">{item.label}</span>
+							<span class="text-right text-sm font-medium text-ink">{item.value}</span>
+						</li>
+					))}
+				</ul>
 			</div>
+		</div>
+	</section>
+
+	<!-- ======================== SELECTED WORK ====================== -->
+	<section id="work" data-reveal class="reveal cv-auto scroll-mt-16 pt-24">
+		<div class="flex flex-wrap items-end justify-between gap-4">
+			<h2 class="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+				Work that shipped.
+			</h2>
+			<a
+				href="https://github.com/Keegerrard"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="cursor-pointer text-sm font-medium text-accent hover:underline"
+			>
+				All repositories on GitHub <span aria-hidden="true">↗</span>
+			</a>
+		</div>
+		<p class="mt-2 max-w-xl text-ink-muted">
+			Tap any project to preview it — public code is linked directly.
+		</p>
+
+		<div class="mt-8">
+			<ProjectGallery client:visible projects={projects} />
+		</div>
+	</section>
+
+	<!-- ========================= JOURNEY =========================== -->
+	<section id="journey" data-reveal class="reveal cv-auto scroll-mt-16 pt-24">
+		<div class="flex flex-wrap items-end justify-between gap-4">
+			<div>
+				<h2 class="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">The journey.</h2>
+				<p class="mt-2 max-w-xl text-ink-muted">
+					Two years, two cities — from a trading floor in Jakarta to production code in Hong Kong.
+				</p>
+			</div>
+			<p class="hidden text-xs text-ink-faint sm:block" aria-hidden="true">Scroll →</p>
+		</div>
+
+		<div class="no-scrollbar -mx-5 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2">
+			{journey.map((stop) => (
+				<article class="lift lift-shadow flex w-[300px] shrink-0 snap-start flex-col rounded-3xl border border-hairline bg-white p-6 shadow-[var(--shadow-rest)]">
+					<div class="flex items-center justify-between text-xs text-ink-faint">
+						<span class="font-medium">{stop.period}</span>
+						<span>{stop.place}</span>
+					</div>
+					<h3 class="mt-5 text-xl font-semibold tracking-tight text-ink">{stop.headline}</h3>
+					<p class="mt-2 flex-1 text-sm leading-relaxed text-ink-muted">{stop.detail}</p>
+					<p class="mt-5 text-xs font-semibold text-ink-muted">{stop.org}</p>
+				</article>
+			))}
+
+			<a
+				href="#contact"
+				class="lift lift-shadow flex w-[300px] shrink-0 cursor-pointer snap-start flex-col justify-between rounded-3xl bg-ink p-6 text-white"
+			>
+				<span class="text-xs font-medium text-white/60">Next stop</span>
+				<div>
+					<h3 class="text-xl font-semibold tracking-tight">Your team?</h3>
+					<p class="mt-2 text-sm leading-relaxed text-white/70">
+						Open to internship and graduate roles in IB and financial services.
+					</p>
+					<p class="mt-5 text-sm font-medium">Get in touch <span aria-hidden="true">›</span></p>
+				</div>
+			</a>
+		</div>
+
+		<p class="mt-6 text-sm text-ink-muted">
+			Want the formal version?
+			<a href={CV_PATH} download class="cursor-pointer font-medium text-accent hover:underline">
+				Download the CV <span aria-hidden="true">↓</span>
+			</a>
+		</p>
+	</section>
+
+	<!-- ========================== CONTACT ========================== -->
+	<section id="contact" data-reveal class="reveal cv-auto flex scroll-mt-16 flex-col items-center pt-28 text-center">
+		<h2 class="text-4xl font-semibold tracking-[-0.03em] text-ink sm:text-5xl">Let's talk.</h2>
+		<p class="mt-4 max-w-lg text-lg leading-relaxed text-ink-muted">
+			Hiring for internships or graduate roles in investment banking or financial services? The
+			inbox is open.
+		</p>
+		<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+			<a
+				href="mailto:keegan.jahja@connect.polyu.hk"
+				class="cursor-pointer rounded-full bg-accent px-6 py-3 font-medium text-white transition-colors duration-200 hover:bg-accent-hover"
+			>
+				Email me
+			</a>
+			<a
+				href={CV_PATH}
+				download
+				class="cursor-pointer rounded-full border border-hairline bg-white px-6 py-3 font-medium text-ink transition-colors duration-200 hover:bg-panel"
+			>
+				Download CV
+			</a>
+		</div>
+		<div class="mt-6 flex flex-wrap items-center justify-center gap-6">
+			<a
+				href="https://github.com/Keegerrard"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="cursor-pointer text-[0.95rem] font-medium text-accent hover:underline"
+			>
+				GitHub <span aria-hidden="true">↗</span>
+			</a>
+			<a href="tel:+85254619905" class="cursor-pointer text-[0.95rem] font-medium text-accent hover:underline">
+				+852 5461 9905
+			</a>
 		</div>
 	</section>
 </Layout>
-
-<style>
-	.hero,
-	.section {
-		scroll-margin-top: 120px;
-	}
-
-	.hero {
-		display: grid;
-		grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-		gap: 28px;
-		align-items: center;
-		padding: 32px 0 72px;
-	}
-
-	.hero-copy {
-		max-width: 42rem;
-	}
-
-	.eyebrow,
-	.section-label {
-		margin: 0;
-		font-size: 0.74rem;
-		font-weight: 700;
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-		color: var(--accent);
-	}
-
-	.hero h1 {
-		margin: 14px 0 0;
-		font-size: clamp(3.5rem, 7vw, 6.9rem);
-		line-height: 0.94;
-		letter-spacing: -0.08em;
-		max-width: 10ch;
-	}
-
-	.lede {
-		margin: 26px 0 0;
-		font-size: clamp(1.06rem, 1.55vw, 1.3rem);
-		line-height: 1.7;
-		letter-spacing: -0.02em;
-		color: var(--muted);
-		max-width: 34rem;
-	}
-
-	.actions {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 12px;
-		margin-top: 30px;
-	}
-
-	.button {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		padding: 13px 20px;
-		border-radius: 999px;
-		font-weight: 600;
-		letter-spacing: -0.02em;
-		text-decoration: none;
-		transition:
-			transform 180ms ease,
-			box-shadow 180ms ease,
-			background 180ms ease,
-			color 180ms ease,
-			border-color 180ms ease;
-	}
-
-	.button:hover,
-	.button:focus-visible {
-		transform: translateY(-1px);
-	}
-
-	.button.primary {
-		background: var(--text);
-		color: #ffffff;
-		box-shadow: 0 18px 36px rgba(17, 17, 17, 0.14);
-	}
-
-	.button.primary:hover,
-	.button.primary:focus-visible {
-		box-shadow: 0 22px 40px rgba(17, 17, 17, 0.18);
-	}
-
-	.button.secondary {
-		border: 1px solid var(--line);
-		background: rgba(255, 255, 255, 0.72);
-		color: var(--text);
-	}
-
-	.button.secondary:hover,
-	.button.secondary:focus-visible {
-		background: #ffffff;
-		border-color: rgba(17, 17, 17, 0.12);
-	}
-
-	.highlights {
-		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 12px;
-		margin-top: 28px;
-	}
-
-	.highlight-card {
-		padding: 18px;
-		border-radius: 24px;
-		background: rgba(255, 255, 255, 0.72);
-		border: 1px solid var(--line);
-		box-shadow: 0 18px 40px rgba(17, 17, 17, 0.05);
-	}
-
-	.highlight-card span {
-		display: block;
-		font-size: 0.75rem;
-		text-transform: uppercase;
-		letter-spacing: 0.14em;
-		color: var(--muted);
-	}
-
-	.highlight-card strong {
-		display: block;
-		margin-top: 10px;
-		font-size: 1rem;
-		line-height: 1.5;
-		letter-spacing: -0.02em;
-	}
-
-	.hero-visual {
-		display: grid;
-		gap: 16px;
-	}
-
-	.portrait-frame {
-		border-radius: 36px;
-		padding: 16px;
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.72));
-		border: 1px solid var(--line);
-		box-shadow: 0 30px 60px rgba(17, 17, 17, 0.08);
-		min-height: 520px;
-		display: flex;
-		align-items: stretch;
-		overflow: hidden;
-	}
-
-	.portrait-image {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		object-position: center top;
-		border-radius: 28px;
-		display: block;
-	}
-
-	.floating-card {
-		margin-left: auto;
-		width: min(84%, 360px);
-		padding: 18px 20px;
-		border-radius: 24px;
-		background: rgba(17, 17, 17, 0.94);
-		color: #ffffff;
-		box-shadow: 0 24px 50px rgba(17, 17, 17, 0.2);
-	}
-
-	.floating-card p {
-		margin: 0;
-		color: rgba(255, 255, 255, 0.7);
-		text-transform: uppercase;
-		letter-spacing: 0.12em;
-		font-size: 0.72rem;
-	}
-
-	.floating-card strong {
-		display: block;
-		margin-top: 10px;
-		font-size: 1.04rem;
-		line-height: 1.55;
-		letter-spacing: -0.02em;
-	}
-
-	.section {
-		padding: 84px 0 0;
-	}
-
-	.section-heading h2 {
-		margin: 10px 0 0;
-		font-size: clamp(2rem, 3.5vw, 3.2rem);
-		line-height: 1.05;
-		letter-spacing: -0.05em;
-		max-width: 12ch;
-	}
-
-	.section-heading.narrow h2 {
-		max-width: 14ch;
-	}
-
-	.split {
-		display: grid;
-		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-		gap: 24px;
-		align-items: start;
-	}
-
-	.about-card {
-		padding: 28px;
-		border-radius: 32px;
-		background: rgba(255, 255, 255, 0.74);
-		border: 1px solid var(--line);
-		box-shadow: 0 20px 40px rgba(17, 17, 17, 0.05);
-		font-size: 1.08rem;
-		line-height: 1.85;
-		color: var(--muted);
-		letter-spacing: -0.02em;
-	}
-
-	.about-card p + p {
-		margin-top: 16px;
-	}
-
-	.timeline {
-		margin-top: 28px;
-		display: grid;
-		gap: 14px;
-	}
-
-	.timeline-item {
-		padding: 24px 26px;
-		border-radius: 28px;
-		background: rgba(255, 255, 255, 0.72);
-		border: 1px solid var(--line);
-		box-shadow: 0 18px 40px rgba(17, 17, 17, 0.05);
-		display: grid;
-		gap: 10px;
-	}
-
-	.timeline-period {
-		margin: 0;
-		font-size: 0.74rem;
-		text-transform: uppercase;
-		letter-spacing: 0.18em;
-		color: var(--muted);
-	}
-
-	.timeline-item h3 {
-		margin: 0;
-		font-size: 1.35rem;
-		letter-spacing: -0.04em;
-	}
-
-	.timeline-item p:last-child {
-		margin: 0;
-		color: var(--muted);
-		line-height: 1.75;
-	}
-
-	.project-grid {
-		margin-top: 28px;
-		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 18px;
-	}
-
-	.project-card {
-		overflow: hidden;
-		border-radius: 32px;
-		background: rgba(255, 255, 255, 0.75);
-		border: 1px solid var(--line);
-		box-shadow: 0 18px 40px rgba(17, 17, 17, 0.05);
-		transition:
-			transform 220ms ease,
-			box-shadow 220ms ease,
-			border-color 220ms ease;
-	}
-
-	.project-card:hover {
-		transform: translateY(-4px);
-		box-shadow: 0 28px 52px rgba(17, 17, 17, 0.09);
-		border-color: rgba(17, 17, 17, 0.12);
-	}
-
-	.project-media {
-		min-height: 220px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 28px;
-		background: linear-gradient(135deg, rgba(10, 132, 255, 0.12), rgba(255, 255, 255, 0.9));
-		border-bottom: 1px solid var(--line);
-		color: var(--muted);
-		text-align: center;
-	}
-
-	.project-media span {
-		max-width: 14ch;
-		text-transform: uppercase;
-		letter-spacing: 0.16em;
-		font-size: 0.72rem;
-		line-height: 1.8;
-	}
-
-	.project-body {
-		padding: 22px 22px 24px;
-	}
-
-	.project-index {
-		margin: 0 0 10px;
-		font-size: 0.75rem;
-		text-transform: uppercase;
-		letter-spacing: 0.18em;
-		color: var(--accent);
-	}
-
-	.project-body h3 {
-		margin: 0;
-		font-size: 1.4rem;
-		letter-spacing: -0.04em;
-	}
-
-	.project-body p {
-		margin: 12px 0 0;
-		color: var(--muted);
-		line-height: 1.75;
-	}
-
-	.stack {
-		list-style: none;
-		padding: 0;
-		margin: 18px 0 0;
-		display: flex;
-		flex-wrap: wrap;
-		gap: 8px;
-	}
-
-	.stack li {
-		padding: 8px 12px;
-		border-radius: 999px;
-		background: var(--accent-soft);
-		color: var(--accent);
-		font-size: 0.84rem;
-		font-weight: 600;
-	}
-
-	.contact-card {
-		display: grid;
-		grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
-		gap: 28px;
-		padding: 32px;
-		border-radius: 36px;
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.72));
-		border: 1px solid var(--line);
-		box-shadow: 0 24px 54px rgba(17, 17, 17, 0.06);
-	}
-
-	.contact-card h2 {
-		margin: 10px 0 0;
-		font-size: clamp(2rem, 3.4vw, 3rem);
-		letter-spacing: -0.05em;
-		line-height: 1.06;
-		max-width: 12ch;
-	}
-
-	.contact-card p {
-		color: var(--muted);
-		line-height: 1.8;
-		max-width: 34rem;
-	}
-
-	.contact-card .button {
-		margin-top: 18px;
-	}
-
-	.contact-list {
-		display: grid;
-		gap: 14px;
-	}
-
-	.contact-item {
-		padding: 18px 20px;
-		border-radius: 24px;
-		background: rgba(255, 255, 255, 0.88);
-		border: 1px solid var(--line);
-		display: flex;
-		justify-content: space-between;
-		gap: 16px;
-		align-items: baseline;
-	}
-
-	.contact-item span {
-		color: var(--muted);
-		font-size: 0.82rem;
-		text-transform: uppercase;
-		letter-spacing: 0.14em;
-	}
-
-	.contact-item strong {
-		font-size: 0.98rem;
-		letter-spacing: -0.02em;
-	}
-
-	@media (max-width: 1000px) {
-		.hero,
-		.split,
-		.contact-card {
-			grid-template-columns: 1fr;
-		}
-
-		.hero {
-			gap: 20px;
-		}
-
-		.hero h1 {
-			max-width: none;
-		}
-
-		.highlights {
-			grid-template-columns: 1fr;
-		}
-
-		.project-grid {
-			grid-template-columns: 1fr;
-		}
-
-		.portrait-frame {
-			min-height: 420px;
-		}
-
-		.floating-card {
-			width: min(100%, 420px);
-		}
-
-		.section-heading h2,
-		.contact-card h2 {
-			max-width: none;
-		}
-	}
-
-	@media (max-width: 760px) {
-		.hero {
-			padding-top: 20px;
-			padding-bottom: 48px;
-		}
-
-		.hero h1 {
-			font-size: clamp(2.8rem, 15vw, 4.4rem);
-		}
-
-		.section {
-			padding-top: 64px;
-		}
-
-		.about-card,
-		.timeline-item,
-		.contact-card {
-			padding: 22px;
-		}
-
-		.portrait-frame {
-			min-height: 360px;
-		}
-	}
-</style>
